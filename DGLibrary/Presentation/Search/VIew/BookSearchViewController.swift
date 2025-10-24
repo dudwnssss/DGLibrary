@@ -10,6 +10,11 @@ import UIKit
 final class BookSearchViewController: UIViewController {
     let mainView: BookSearchView = .init()
     
+    let mockBooks: [BookSearchModel.Fetch.ViewModel.DisplayedBook] = [
+        .init(title: "mockTitle", subTitle: "mockSubTitle", isbn13: "mockIsbn13", price: "mockPrice", imageURL: "mockImageURL", detailURL: "mockDetailURL"),
+        .init(title: "mockTitle", subTitle: "mockSubTitle", isbn13: "mockIsbn13", price: "mockPrice", imageURL: "mockImageURL", detailURL: "mockDetailURL")
+    ]
+    
     override func loadView() {
         self.view = mainView
     }
@@ -24,6 +29,7 @@ final class BookSearchViewController: UIViewController {
         self.navigationItem.title = "Search"
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
+        mainView.tableView.register(BookSearchTableViewCell.self, forCellReuseIdentifier: BookSearchTableViewCell.reuseIdentifier)
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
     }
@@ -31,16 +37,27 @@ final class BookSearchViewController: UIViewController {
 
 extension BookSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return mockBooks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: BookSearchTableViewCell.reuseIdentifier,
+            for: indexPath
+        ) as? BookSearchTableViewCell else { return UITableViewCell() }
+        
+        cell.configureCell(with: mockBooks[indexPath.row])
+        
+        return cell
     }
 }
 
 extension BookSearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
 }
 

@@ -15,7 +15,7 @@ enum BookSearchModel {
             struct DisplayedBook {
                 let title: String
                 let subTitle: String
-                let isbn3: String
+                let isbn13: String
                 let price: String
                 let imageURL: String
                 let detailURL: String
