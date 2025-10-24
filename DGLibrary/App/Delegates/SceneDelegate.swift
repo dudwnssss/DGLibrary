@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = BookSearchViewController()
+        window?.rootViewController = UINavigationController(rootViewController: BookSearchViewController())
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
