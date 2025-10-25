@@ -32,5 +32,6 @@ enum BookSearchModel {
     
     enum Select {
         struct Request {}
+        struct Response {}
     }
 }

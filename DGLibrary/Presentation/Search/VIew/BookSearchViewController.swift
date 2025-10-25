@@ -33,6 +33,7 @@ final class BookSearchViewController: UIViewController {
         
         mainView.tableView.register(BookSearchTableViewCell.self, forCellReuseIdentifier: BookSearchTableViewCell.reuseIdentifier)
         mainView.tableView.dataSource = self
+        mainView.tableView.prefetchDataSource = self
         mainView.tableView.delegate = self
     }
 }
@@ -63,5 +64,8 @@ extension BookSearchViewController: UITableViewDelegate {
     }
 }
 
-
-
+extension BookSearchViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+    }
+}

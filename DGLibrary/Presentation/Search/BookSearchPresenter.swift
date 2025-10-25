@@ -7,6 +7,8 @@
 
 import Foundation
 
-final class BookSearchPresenter {
-    
+protocol BookSearchPresenter {
+    func presentSearchBooks(request: BookSearchModel.Fetch.Response)
+    func presentNextBooks(request: BookSearchModel.Next.Response)
+    func presentBookDetail(request: BookSearchModel.Select.Response)
 }
