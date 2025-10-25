@@ -35,7 +35,7 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         Task {
             do {
                 let result = try await repository.fetchBookSearch(
-                    qeury: request.query,
+                    query: request.query,
                     page: 1
                 )
                 self.allBooks = result.books
@@ -59,7 +59,7 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         Task {
             do  {
                 let result = try await repository.fetchBookSearch(
-                    qeury: currentQuery,
+                    query: currentQuery,
                     page: nextPage
                 )
                 
