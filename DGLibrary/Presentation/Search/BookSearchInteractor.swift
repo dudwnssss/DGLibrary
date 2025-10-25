@@ -7,6 +7,8 @@
 
 import Foundation
 
-final class BookSearchInteractor {
-    
+protocol BookSearchInteractor {
+    func search(request: BookSearchModel.Fetch.Request) async -> BookSearchModel.Fetch.Response
+    func next(request: BookSearchModel.Next.Request) async -> BookSearchModel.Next.Response
+    func select(request: BookSearchModel.Select.Request)
 }

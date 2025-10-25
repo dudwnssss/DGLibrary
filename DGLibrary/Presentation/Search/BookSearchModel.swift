@@ -23,4 +23,14 @@ enum BookSearchModel {
             let books: [DisplayedBook]
         }
     }
+    
+    enum Next {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {}
+    }
+    
+    enum Select {
+        struct Request {}
+    }
 }

@@ -8,7 +8,9 @@
 import UIKit
 
 final class BookSearchViewController: UIViewController {
-    let mainView: BookSearchView = .init()
+    var interactor: BookSearchInteractor?
+    
+    private let mainView: BookSearchView = .init()
     
     let mockBooks: [BookSearchModel.Fetch.ViewModel.DisplayedBook] = [
         .init(title: "mockTitle", subTitle: "mockSubTitle", isbn13: "mockIsbn13", price: "mockPrice", imageURL: "mockImageURL", detailURL: "mockDetailURL"),
