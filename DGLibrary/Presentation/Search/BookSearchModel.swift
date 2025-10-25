@@ -9,7 +9,9 @@ import Foundation
 
 enum BookSearchModel {
     enum Fetch {
-        struct Request {}
+        struct Request {
+            let query: String
+        }
         struct Response {}
         struct ViewModel {
             struct DisplayedBook {
