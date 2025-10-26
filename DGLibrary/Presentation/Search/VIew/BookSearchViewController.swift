@@ -12,7 +12,7 @@ final class BookSearchViewController: UIViewController {
     
     private let mainView: BookSearchView = .init()
     
-    private var displayedBooks: [BookSearchModel.Fetch.ViewModel.DisplayedBook] = []
+    private var displayedBooks: [BookSearchModel.DisplayedBook] = []
     
     override func loadView() {
         self.view = mainView
@@ -44,7 +44,15 @@ extension BookSearchViewController: BookSearchDisplay {
     }
 
     func displayMoreBooks(viewModel: BookSearchModel.Next.ViewModel) {
+        let startIndex = displayedBooks.count
+        self.displayedBooks.append(contentsOf: viewModel.books)
         
+        let indexPaths = (startIndex..<displayedBooks.count).map {
+            IndexPath(row: $0, section: 0)
+        }
+        mainView.tableView.performBatchUpdates {
+            mainView.tableView.insertRows(at: indexPaths, with: .fade)
+        }
     }
 
     func displayError() {

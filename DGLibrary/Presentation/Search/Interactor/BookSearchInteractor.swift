@@ -80,10 +80,10 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                     page: nextPage
                 )
                 
-                currentPage = nextPage
                 self.allBooks.append(contentsOf: result.books)
-                
-                let response = BookSearchModel.Next.Response()
+                self.currentPage = nextPage
+
+                let response = BookSearchModel.Next.Response(books: result.books)
                 
                 await MainActor.run {
                     presenter?.presentNextBooks(response: response)

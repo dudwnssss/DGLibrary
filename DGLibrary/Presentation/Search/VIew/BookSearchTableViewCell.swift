@@ -66,7 +66,7 @@ final class BookSearchTableViewCell: UITableViewCell {
         priceLabel.text = nil
     }
     
-    func configureCell(with book: BookSearchModel.Fetch.ViewModel.DisplayedBook) {
+    func configureCell(with book: BookSearchModel.DisplayedBook) {
         titleLabel.text = book.title
         subtitleLabel.text = book.subTitle
         isbnLabel.text = book.isbn13

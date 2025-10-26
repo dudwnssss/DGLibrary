@@ -8,6 +8,15 @@
 import Foundation
 
 enum BookSearchModel {
+    struct DisplayedBook {
+        let title: String
+        let subTitle: String
+        let isbn13: String
+        let price: String
+        let imageURL: String
+        let detailURL: String
+    }
+    
     enum Fetch {
         struct Request {
             let query: String
@@ -18,22 +27,18 @@ enum BookSearchModel {
             let currentPage: Int
         }
         struct ViewModel {
-            struct DisplayedBook {
-                let title: String
-                let subTitle: String
-                let isbn13: String
-                let price: String
-                let imageURL: String
-                let detailURL: String
-            }
             let books: [DisplayedBook]
         }
     }
     
     enum Next {
         struct Request {}
-        struct Response {}
-        struct ViewModel {}
+        struct Response {
+            let books: [BookSearch]
+        }
+        struct ViewModel {
+            let books: [DisplayedBook]
+        }
     }
     
     enum Select {
