@@ -17,9 +17,17 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
     var presenter: BookSearchPresenter?
     private let repository: BookRepository
     
+    private var allBooks: [BookSearch] = []
     private var currentQuery: String = ""
     private var currentPage: Int = 1
-    private var allBooks: [BookSearch] = []
+    private var totalCount: Int = 0
+    
+    private var hasNextPage: Bool {
+        guard !allBooks.isEmpty,
+              totalCount > 0 else { return false }
+        
+        return allBooks.count < totalCount
+    }
     
     init(repository: BookRepository) {
         self.repository = repository
@@ -27,9 +35,9 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
     
     func search(request: BookSearchModel.Fetch.Request) {
         ///상태 초기화
+        allBooks = []
         currentQuery = request.query
         currentPage = 1
-        allBooks = []
         
         ///repository에서 검색 요청 후 상태 갱신
         Task {
@@ -39,8 +47,14 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                     page: 1
                 )
                 self.allBooks = result.books
+                self.currentPage = result.page
+                self.totalCount = result.total
                 
-                let response = BookSearchModel.Fetch.Response()
+                let response = BookSearchModel.Fetch.Response(
+                    books: result.books,
+                    totalCount: result.total,
+                    currentPage: result.page
+                )
                 
                 await MainActor.run {
                     presenter?.presentSearchBooks(response: response)
@@ -48,11 +62,14 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 
             } catch {
                 ///검색 실패 시 예외처리
+                presenter?.presentError(error: error)
             }
         }
     }
 
     func next(request: BookSearchModel.Next.Request) {
+        guard hasNextPage else { return }
+        
         let nextPage = currentPage + 1
         
         ///repository에서 검색 요청 후 상태 갱신
@@ -80,7 +97,14 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
     }
 
     func select(request: BookSearchModel.Select.Request) {
-        let response = BookSearchModel.Select.Response()
+        guard request.index >= 0,
+              request.index < allBooks.count else {
+            return
+        }
+        
+        let book = allBooks[request.index]
+        let response = BookSearchModel.Select.Response(isbn13: book.isbn13)
+        
         presenter?.presentBookDetail(response: response)
     }
 }

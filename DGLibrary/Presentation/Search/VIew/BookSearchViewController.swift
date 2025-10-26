@@ -12,10 +12,7 @@ final class BookSearchViewController: UIViewController {
     
     private let mainView: BookSearchView = .init()
     
-    let mockBooks: [BookSearchModel.Fetch.ViewModel.DisplayedBook] = [
-        .init(title: "mockTitle", subTitle: "mockSubTitle", isbn13: "mockIsbn13", price: "mockPrice", imageURL: "mockImageURL", detailURL: "mockDetailURL"),
-        .init(title: "mockTitle", subTitle: "mockSubTitle", isbn13: "mockIsbn13", price: "mockPrice", imageURL: "mockImageURL", detailURL: "mockDetailURL")
-    ]
+    private var displayedBooks: [BookSearchModel.Fetch.ViewModel.DisplayedBook] = []
     
     override func loadView() {
         self.view = mainView
@@ -31,6 +28,8 @@ final class BookSearchViewController: UIViewController {
         self.navigationItem.title = "Search"
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
+        mainView.searchController.searchBar.delegate = self
+        
         mainView.tableView.register(BookSearchTableViewCell.self, forCellReuseIdentifier: BookSearchTableViewCell.reuseIdentifier)
         mainView.tableView.dataSource = self
         mainView.tableView.prefetchDataSource = self
@@ -38,9 +37,35 @@ final class BookSearchViewController: UIViewController {
     }
 }
 
+extension BookSearchViewController: BookSearchDisplay {
+    func displaySearchResults(viewModel: BookSearchModel.Fetch.ViewModel) {
+        self.displayedBooks = viewModel.books
+        mainView.tableView.reloadData()
+    }
+
+    func displayMoreBooks(viewModel: BookSearchModel.Next.ViewModel) {
+        
+    }
+
+    func displayError() {
+        
+    }
+}
+
+extension BookSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text,
+              !query.isEmpty else { return }
+        
+        let request: BookSearchModel.Fetch.Request = .init(query: query)
+        interactor?.search(request: request)
+        searchBar.resignFirstResponder()
+    }
+}
+
 extension BookSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mockBooks.count
+        return displayedBooks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +74,7 @@ extension BookSearchViewController: UITableViewDataSource {
             for: indexPath
         ) as? BookSearchTableViewCell else { return UITableViewCell() }
         
-        cell.configureCell(with: mockBooks[indexPath.row])
+        cell.configureCell(with: displayedBooks[indexPath.row])
         
         return cell
     }
@@ -60,12 +85,21 @@ extension BookSearchViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        let request: BookSearchModel.Select.Request = .init(index: indexPath.row)
+        interactor?.select(request: request)
     }
 }
 
 extension BookSearchViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
+        for indexPath in indexPaths {
+            if indexPath.row >= displayedBooks.count - 3 {
+                let request = BookSearchModel.Next.Request()
+                
+                interactor?.next(request: request)
+                
+                return
+            }
+        }
     }
 }

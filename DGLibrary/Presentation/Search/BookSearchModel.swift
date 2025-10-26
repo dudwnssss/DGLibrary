@@ -12,7 +12,11 @@ enum BookSearchModel {
         struct Request {
             let query: String
         }
-        struct Response {}
+        struct Response {
+            let books: [BookSearch]
+            let totalCount: Int
+            let currentPage: Int
+        }
         struct ViewModel {
             struct DisplayedBook {
                 let title: String
@@ -33,7 +37,11 @@ enum BookSearchModel {
     }
     
     enum Select {
-        struct Request {}
-        struct Response {}
+        struct Request {
+            let index: Int
+        }
+        struct Response {
+            let isbn13: String
+        }
     }
 }
