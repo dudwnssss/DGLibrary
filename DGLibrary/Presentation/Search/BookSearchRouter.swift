@@ -17,5 +17,7 @@ final class DefaultBookSearchRouter: BookSearchRouter {
     func navigateToBookDetail(isbn13: String) {
         ///1. builder에서 detailVC생성
         ///2. navigation
+        let vc = BookDetailBuilder.build(isbn13: isbn13)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

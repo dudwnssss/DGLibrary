@@ -28,6 +28,7 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         
         return allBooks.count < totalCount
     }
+    private var isLoadingMore: Bool = false
     
     init(repository: BookRepository) {
         self.repository = repository
@@ -68,8 +69,10 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
     }
 
     func next(request: BookSearchModel.Next.Request) {
-        guard hasNextPage else { return }
+        guard hasNextPage,
+              !isLoadingMore else { return }
         
+        isLoadingMore = true
         let nextPage = currentPage + 1
         
         ///repository에서 검색 요청 후 상태 갱신
@@ -92,6 +95,7 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
             } catch {
                 ///로드 실패 시 예외처리
             }
+            isLoadingMore = false
         }
         
     }
