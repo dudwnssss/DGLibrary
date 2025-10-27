@@ -43,6 +43,8 @@ extension UIImageView {
             
             do {
                 let image = try await ImageDownloader.shared.downloadImage(from: url)
+                print("용량 \(image.pngData()?.count)")
+
                 ImageCache.shared.store(image, for: key)
                 await MainActor.run {
                     self.image = image

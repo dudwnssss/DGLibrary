@@ -10,9 +10,20 @@
 		10AE5A212EAB5C2000F21F1A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 10AE5A202EAB5C2000F21F1A /* .gitignore */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		10B137C92EAF9A7E00D4011D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 10190D602EAB47D200B3CB6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 10190D672EAB47D200B3CB6F;
+			remoteInfo = DGLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		10190D682EAB47D200B3CB6F /* DGLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10AE5A202EAB5C2000F21F1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		10B137C52EAF9A7E00D4011D /* DGLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DGLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -20,8 +31,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Info.plist,
+				Presentation/Search/Tests/BookSearchInteractorTests.swift,
 			);
 			target = 10190D672EAB47D200B3CB6F /* DGLibrary */;
+		};
+		10B137CF2EAF9A9400D4011D /* Exceptions for "DGLibrary" folder in "DGLibraryTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Presentation/Search/Tests/BookSearchInteractorTests.swift,
+			);
+			target = 10B137C42EAF9A7E00D4011D /* DGLibraryTests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -30,14 +49,27 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				10190D7A2EAB47D400B3CB6F /* Exceptions for "DGLibrary" folder in "DGLibrary" target */,
+				10B137CF2EAF9A9400D4011D /* Exceptions for "DGLibrary" folder in "DGLibraryTests" target */,
 			);
 			path = DGLibrary;
+			sourceTree = "<group>";
+		};
+		10B137C62EAF9A7E00D4011D /* DGLibraryTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DGLibraryTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		10190D652EAB47D200B3CB6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10B137C22EAF9A7E00D4011D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -52,6 +84,7 @@
 			children = (
 				10AE5A202EAB5C2000F21F1A /* .gitignore */,
 				10190D6A2EAB47D200B3CB6F /* DGLibrary */,
+				10B137C62EAF9A7E00D4011D /* DGLibraryTests */,
 				10190D692EAB47D200B3CB6F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				10190D682EAB47D200B3CB6F /* DGLibrary.app */,
+				10B137C52EAF9A7E00D4011D /* DGLibraryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +123,29 @@
 			productReference = 10190D682EAB47D200B3CB6F /* DGLibrary.app */;
 			productType = "com.apple.product-type.application";
 		};
+		10B137C42EAF9A7E00D4011D /* DGLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10B137CD2EAF9A7E00D4011D /* Build configuration list for PBXNativeTarget "DGLibraryTests" */;
+			buildPhases = (
+				10B137C12EAF9A7E00D4011D /* Sources */,
+				10B137C22EAF9A7E00D4011D /* Frameworks */,
+				10B137C32EAF9A7E00D4011D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10B137CA2EAF9A7E00D4011D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				10B137C62EAF9A7E00D4011D /* DGLibraryTests */,
+			);
+			name = DGLibraryTests;
+			packageProductDependencies = (
+			);
+			productName = DGLibraryTests;
+			productReference = 10B137C52EAF9A7E00D4011D /* DGLibraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,6 +158,10 @@
 				TargetAttributes = {
 					10190D672EAB47D200B3CB6F = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					10B137C42EAF9A7E00D4011D = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 10190D672EAB47D200B3CB6F;
 					};
 				};
 			};
@@ -119,6 +180,7 @@
 			projectRoot = "";
 			targets = (
 				10190D672EAB47D200B3CB6F /* DGLibrary */,
+				10B137C42EAF9A7E00D4011D /* DGLibraryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -132,6 +194,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		10B137C32EAF9A7E00D4011D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -142,7 +211,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		10B137C12EAF9A7E00D4011D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		10B137CA2EAF9A7E00D4011D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 10190D672EAB47D200B3CB6F /* DGLibrary */;
+			targetProxy = 10B137C92EAF9A7E00D4011D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		10190D7C2EAB47D400B3CB6F /* Debug */ = {
@@ -153,6 +237,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5FA8TZGUDC;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DGLibrary/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -181,6 +266,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5FA8TZGUDC;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DGLibrary/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -322,6 +408,44 @@
 			};
 			name = Release;
 		};
+		10B137CB2EAF9A7E00D4011D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5FA8TZGUDC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = assignment.DGLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DGLibrary.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DGLibrary";
+			};
+			name = Debug;
+		};
+		10B137CC2EAF9A7E00D4011D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5FA8TZGUDC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = assignment.DGLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DGLibrary.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DGLibrary";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +463,15 @@
 			buildConfigurations = (
 				10190D7C2EAB47D400B3CB6F /* Debug */,
 				10190D7D2EAB47D400B3CB6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10B137CD2EAF9A7E00D4011D /* Build configuration list for PBXNativeTarget "DGLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10B137CB2EAF9A7E00D4011D /* Debug */,
+				10B137CC2EAF9A7E00D4011D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

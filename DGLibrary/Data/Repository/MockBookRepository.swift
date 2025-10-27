@@ -8,6 +8,26 @@
 import Foundation
 
 final class MockBookRepository: BookRepository {
+    var mockSearchResult: Result<BookSearchList, Error>?
+    var mockDetailResult: Result<BookDetail, Error>?
+    
+    // MARK: - 호출 추적용 프로퍼티
+    
+    /// fetchBookSearch가 호출된 횟수
+    var fetchCallCount = 0
+    
+    /// 마지막으로 요청된 쿼리
+    var lastRequestedQuery: String?
+    
+    /// 마지막으로 요청된 페이지
+    var lastRequestedPage: Int?
+    
+    /// fetchBookDetail이 호출된 횟수
+    var fetchDetailCallCount = 0
+    
+    /// 마지막으로 요청된 ISBN
+    var lastRequestedISBN: String?
+
     private let allMockBooks: [BookSearch] = [
         // iOS & Swift
         .init(
@@ -283,69 +303,39 @@ final class MockBookRepository: BookRepository {
     ]
     
     func fetchBookSearch(query: String, page: Int) async throws -> BookSearchList {
-        try await Task.sleep(nanoseconds: 500_000_000) // 0.5초
+        // 호출 추적
+        fetchCallCount += 1
+        lastRequestedQuery = query
+        lastRequestedPage = page
         
-        let itemsPerPage = 10
-        let startIndex = (page - 1) * itemsPerPage
-        let endIndex = min(startIndex + itemsPerPage, allMockBooks.count)
-        
-        guard startIndex < allMockBooks.count else {
-            return BookSearchList(
-                total: allMockBooks.count,
-                page: page,
-                books: []
-            )
+        // Mock 결과 반환
+        guard let result = mockSearchResult else {
+            throw NetworkError.decodingError
         }
         
-        let booksForPage = Array(allMockBooks[startIndex..<endIndex])
-        
-        print("📚 Mock Repository - 페이지 \(page): \(booksForPage.count)개 반환 (전체: \(allMockBooks.count))")
-        
-        return BookSearchList(
-            total: allMockBooks.count,
-            page: page,
-            books: booksForPage
-        )
+        switch result {
+        case .success(let bookList):
+            return bookList
+        case .failure(let error):
+            throw error
+        }
     }
 
     func fetchBookDetail(isbn13: String) async throws -> BookDetail {
-        try await Task.sleep(nanoseconds: 300_000_000)
+        // 호출 추적
+        fetchDetailCallCount += 1
+        lastRequestedISBN = isbn13
         
-        return BookDetail(
-            error: 0,
-            title: "iOS Programming: The Big Nerd Ranch Guide",
-            subtitle: "8th Edition",
-            authors: ["Christian Keur", "Aaron Hillegass"],
-            publisher: "Big Nerd Ranch Guides",
-            isbn10: "0135264022",
-            isbn13: isbn13,
-            pages: 600,
-            year: 2021,
-            rating: 4.5,
-            desc: """
-            Updated for Xcode 12, iOS 14, and Swift 5.3, iOS Programming: The Big Nerd Ranch Guide leads you through the essential concepts, techniques, and tools for developing iOS applications.
-            
-            After completing this book, you will have the knowledge and confidence to tackle iOS projects of your own. Based on Big Nerd Ranch's popular iOS training and its well-tested materials and methodology, this bestselling guide teaches iOS concepts and coding in tandem.
-            
-            The result is instruction that is relevant and useful. Throughout the book, the authors explain what's important and share their insights into the larger context of the iOS platform.
-            """,
-            price: 49.99,
-            imageURL: URL(string: "https://itbook.store/img/books/9780135264027.png"),
-            detailURL: URL(string: "https://itbook.store/books/9780135264027"),
-            pdf: [
-                PDFChapter(
-                    title: "Chapter 1: A Simple iOS Application",
-                    url: URL(string: "https://example.com/pdf/chapter1.pdf")!
-                ),
-                PDFChapter(
-                    title: "Chapter 2: The Swift Language",
-                    url: URL(string: "https://example.com/pdf/chapter2.pdf")!
-                ),
-                PDFChapter(
-                    title: "Chapter 3: Views and the View Hierarchy",
-                    url: URL(string: "https://example.com/pdf/chapter3.pdf")!
-                )
-            ]
-        )
+        // Mock 결과 반환
+        guard let result = mockDetailResult else {
+            throw NetworkError.decodingError
+        }
+        
+        switch result {
+        case .success(let detail):
+            return detail
+        case .failure(let error):
+            throw error
+        }
     }
 }
