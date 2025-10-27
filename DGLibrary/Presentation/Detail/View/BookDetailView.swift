@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import PDFKit
 
 final class BookDetailView: UIView {
+    var onMenuSelected: ((URL) -> Void)?
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -82,13 +83,13 @@ final class BookDetailView: UIView {
         return label
     }()
     
-    private lazy var pdfView: PDFView = {
-        let pdfView = PDFView()
-        pdfView.backgroundColor = .cyan
-        pdfView.autoScales = true
-        pdfView.displayMode = .singlePageContinuous
-        pdfView.displayDirection = .vertical
-        return pdfView
+    private lazy var pdfButton: UIButton = {
+        var configuration = UIButton.Configuration.gray()
+        configuration.title = "Download PDF"
+        configuration.cornerStyle = .capsule
+        let button = UIButton(configuration: configuration)
+        button.showsMenuAsPrimaryAction = true
+        return button
     }()
     
     private lazy var verticalStackView: UIStackView = {
@@ -103,13 +104,12 @@ final class BookDetailView: UIView {
             yearLabel,
             ratingLabel,
             descLabel,
-            priceLabel,
-            pdfView
+            priceLabel
         ])
         stackView.axis = .vertical
         return stackView
     }()
-    
+     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -132,12 +132,33 @@ final class BookDetailView: UIView {
         yearLabel.text = book.year
         ratingLabel.text = book.rating
         descLabel.text = book.desc
-
         
-        if let url = URL(string: "https://archive.org/download/notes-on-randomized-algorithms-1761303796/notes-on-randomized-algorithms.pdf"),
-           let document = PDFDocument(url: url) {
-            pdfView.document = document
+        if !book.pdfs.isEmpty {
+            setupPDFButton()
+            configureMenu(with: book.pdfs)
         }
+    }
+
+    func setupPDFButton() {
+        thumbnailImageView.isUserInteractionEnabled = true
+        thumbnailImageView.addSubview(pdfButton)
+        pdfButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            pdfButton.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor),
+            pdfButton.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor)
+        ])
+    }
+    
+    func configureMenu(with pdfs: [PDFChapter]) {
+        let children = pdfs.map { pdf in
+            UIAction(title: pdf.title) { [weak self] _ in
+                guard let url = pdf.url else { return }
+                self?.onMenuSelected?(url)
+            }
+        }
+        let menu = UIMenu(children: children)
+        pdfButton.menu = menu
     }
     
     private func setupUI() {
@@ -185,3 +206,5 @@ final class BookDetailView: UIView {
         ])
     }
 }
+
+

@@ -34,6 +34,9 @@ final class BookDetailViewController: UIViewController {
     
     private func setProperties() {
         self.title = "Detail"
+        mainView.onMenuSelected = { [weak self] url in
+            self?.interactor?.selectPDF(request: .init(pdfURL: url))
+        }
     }
 }
 

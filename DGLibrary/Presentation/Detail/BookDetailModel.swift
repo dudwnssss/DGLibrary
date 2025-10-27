@@ -36,4 +36,13 @@ enum BookDetailModel {
             let book: DisplayedBook
         }
     }
+    
+    enum PDF {
+        struct Request {
+            let pdfURL: URL
+        }
+        struct Resopnse {
+            let pdfURL: URL
+        }
+    }
 }

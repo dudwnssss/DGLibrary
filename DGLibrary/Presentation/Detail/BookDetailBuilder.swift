@@ -11,6 +11,7 @@ enum BookDetailBuilder {
     static func build(isbn13: String) -> UIViewController {
         let viewController = BookDetailViewController(isbn13: isbn13)
         let presenter = DefaultBookDetailPresenter()
+        let router = DefaultBookDetailRouter()
         
         let networkService = DefaultNetworkService()
         let repository = DefaultBookRepository(networkService: networkService)
@@ -19,6 +20,8 @@ enum BookDetailBuilder {
         viewController.interactor = interactor
         interactor.presenter = presenter
         presenter.viewController = viewController
+        presenter.router = router
+        router.viewController = viewController
         
         return viewController
     }

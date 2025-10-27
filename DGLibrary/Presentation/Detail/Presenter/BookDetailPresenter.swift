@@ -9,17 +9,24 @@ import Foundation
 
 protocol BookDetailPresenter {
     func presentDetailBook(response: BookDetailModel.Fetch.Response)
+    func presentPDF(response: BookDetailModel.PDF.Resopnse)
     func presentError(error: Error)
 }
 
 final class DefaultBookDetailPresenter: BookDetailPresenter {
     weak var viewController: BookDetailDisplay?
+    var router: BookDetailRouter?
     
     func presentDetailBook(response: BookDetailModel.Fetch.Response) {
         let displayedBook = convertToDisplayedBook(response.book)
         let viewModel = BookDetailModel.Fetch.ViewModel(book: displayedBook)
         
         viewController?.displayDetailResult(viewModel: viewModel)
+    }
+    
+    func presentPDF(response: BookDetailModel.PDF.Resopnse) {
+        let url = response.pdfURL
+        router?.presentPDF(url: url)
     }
     
     func presentError(error: any Error) {
