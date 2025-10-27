@@ -55,15 +55,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E97D028C-A194-409A-B4B1-066C7273DC25"
+            uuid = "A47CB2B0-81D2-42B3-9F75-29C433BAE35E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DGLibrary/Common/CacheManager/ImageDownloader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "setImage(with:placeholder:)"
             landmarkType = "7">
          </BreakpointContent>

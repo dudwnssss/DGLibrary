@@ -31,11 +31,22 @@ extension UIImageView {
     func setImage(with url: URL?, placeholder: UIImage? = nil) {
         guard let url else { return }
         self.image = placeholder
+        let key = url.absoluteString
         
         Task {
+            if let cachedImage = await ImageCache.shared.retrieve(for: key) {
+                await MainActor.run {
+                    self.image = cachedImage
+                }
+                return
+            }
+            
             do {
                 let image = try await ImageDownloader.shared.downloadImage(from: url)
-                self.image = image
+                ImageCache.shared.store(image, for: key)
+                await MainActor.run {
+                    self.image = image
+                }
             } catch {
                 
             }
