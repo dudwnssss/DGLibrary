@@ -8,7 +8,19 @@
 import UIKit
 
 final class BookDetailViewController: UIViewController {
-    let mainView = BookDetailView()
+    var interactor: BookDetailInteractor?
+    private let isbn13: String
+    private let mainView = BookDetailView()
+    
+    init(isbn13: String) {
+        self.isbn13 = isbn13
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         self.view = mainView
@@ -16,6 +28,21 @@ final class BookDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Detail"
+        setProperties()
+        interactor?.fetch(request: .init(isbn13: isbn13))
+    }
+    
+    private func setProperties() {
+        self.title = "Detail"
+    }
+}
+
+extension BookDetailViewController: BookDetailDisplay {
+    func displayDetailResult(viewModel: BookDetailModel.Fetch.ViewModel) {
+        mainView.configure(with: viewModel.book)
+    }
+
+    func displayError() {
+
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 enum BookSearchModel {
     struct DisplayedBook {
         let title: String
-        let subTitle: String
+        let subtitle: String
         let isbn13: String
         let price: String
         let imageURL: String

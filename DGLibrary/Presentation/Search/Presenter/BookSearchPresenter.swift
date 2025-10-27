@@ -37,14 +37,14 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
     }
     
     func presentError(error: any Error) {
-        
+        viewController?.displayError()
     }
     
     
     private func convertToDisplayedBook(_ book: BookSearch) -> BookSearchModel.DisplayedBook {
         return BookSearchModel.DisplayedBook(
             title: book.title,
-            subTitle: book.subtitle,
+            subtitle: book.subtitle,
             isbn13: book.isbn13,
             price: formatPrice(book.price),
             imageURL: book.imageURL?.absoluteString ?? "",

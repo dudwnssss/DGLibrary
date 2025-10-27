@@ -68,7 +68,7 @@ final class BookSearchTableViewCell: UITableViewCell {
     
     func configureCell(with book: BookSearchModel.DisplayedBook) {
         titleLabel.text = book.title
-        subtitleLabel.text = book.subTitle
+        subtitleLabel.text = book.subtitle
         isbnLabel.text = book.isbn13
         priceLabel.text = book.price
     }
