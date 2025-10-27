@@ -26,7 +26,7 @@ struct BookDetailDTO: Decodable {
     let price: String
     let image: String
     let url: String
-    let pdf: [String: String]
+    let pdf: [String: String]?
 }
 
 extension BookDetailDTO {
@@ -44,8 +44,8 @@ extension BookDetailDTO {
             rating: 0,
             desc: self.desc,
             price: 0,
-            imageURL: nil,
-            detailURL: nil,
+            imageURL: URL(string: image),
+            detailURL: URL(string: url),
             pdf: []
         )
     }

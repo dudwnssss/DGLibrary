@@ -14,7 +14,6 @@ final class BookSearchTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemPink
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -70,6 +69,7 @@ final class BookSearchTableViewCell: UITableViewCell {
     }
     
     func configureCell(with book: BookSearchModel.DisplayedBook) {
+        thumbnailImageView.setImage(with: book.imageURL)
         titleLabel.text = book.title
         subtitleLabel.text = book.subtitle
         isbnLabel.text = book.isbn13

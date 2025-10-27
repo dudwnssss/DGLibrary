@@ -20,6 +20,7 @@ final class BookDetailView: UIView {
     
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemPink
         return imageView
     }()
@@ -109,6 +110,7 @@ final class BookDetailView: UIView {
     }
     
     func configure(with book: BookDetailModel.DisplayedBook) {
+        thumbnailImageView.setImage(with: book.imageURL)
         titleLabel.text = book.title
         subtitleLabel.text = book.subtitle
         authorsLabel.text = book.authors

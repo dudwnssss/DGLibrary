@@ -47,8 +47,8 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
             subtitle: book.subtitle,
             isbn13: book.isbn13,
             price: formatPrice(book.price),
-            imageURL: book.imageURL?.absoluteString ?? "",
-            detailURL: book.detailURL?.absoluteString ?? ""
+            imageURL: book.imageURL,
+            detailURL: book.detailURL
         )
     }
     

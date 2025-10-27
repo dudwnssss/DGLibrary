@@ -13,8 +13,8 @@ enum BookSearchModel {
         let subtitle: String
         let isbn13: String
         let price: String
-        let imageURL: String
-        let detailURL: String
+        let imageURL: URL?
+        let detailURL: URL?
     }
     
     enum Fetch {

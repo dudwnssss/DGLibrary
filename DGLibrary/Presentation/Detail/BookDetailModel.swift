@@ -20,8 +20,8 @@ enum BookDetailModel {
         let rating: String
         let desc: String
         let price: String
-        let iamge: URL?
-        let url: URL?
+        let imageURL: URL?
+        let detailUrl: URL?
     }
     
     enum Fetch {

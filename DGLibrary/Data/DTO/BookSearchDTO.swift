@@ -45,8 +45,8 @@ extension BookSearchDTO {
             subtitle: self.subtitle,
             isbn13: self.isbn13,
             price: 0,
-            imageURL: nil,
-            detailURL: nil
+            imageURL: URL(string: image),
+            detailURL: URL(string: url),
         )
     }
 }

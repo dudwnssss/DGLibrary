@@ -40,8 +40,8 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
                 rating: "",
                 desc: book.desc,
                 price: "",
-                iamge: book.imageURL,
-                url: book.detailURL
+                imageURL: book.imageURL,
+                detailUrl: book.detailURL
             )
     }
 }
