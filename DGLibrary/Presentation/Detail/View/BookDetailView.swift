@@ -8,6 +8,16 @@
 import UIKit
 
 final class BookDetailView: UIView {
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemPink
@@ -114,26 +124,45 @@ final class BookDetailView: UIView {
     private func setupUI() {
         self.backgroundColor = .white
         
-        addSubview(thumbnailImageView)
+        addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        
+        contentView.addSubview(thumbnailImageView)
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            thumbnailImageView.topAnchor.constraint(equalTo: topAnchor),
-            thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            thumbnailImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            thumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            thumbnailImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             thumbnailImageView.heightAnchor.constraint(equalTo: thumbnailImageView.widthAnchor)
         ])
         
-        addSubview(verticalStackView)
-        
+        contentView.addSubview(verticalStackView)
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor),
-            verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            verticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

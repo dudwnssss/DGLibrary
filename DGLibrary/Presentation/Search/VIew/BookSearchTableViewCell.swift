@@ -12,6 +12,9 @@ final class BookSearchTableViewCell: UITableViewCell {
     
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .systemPink
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -77,11 +80,16 @@ final class BookSearchTableViewCell: UITableViewCell {
         self.contentView.addSubview(horizontalStackView)
         
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             horizontalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             horizontalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: 120),
+            thumbnailImageView.widthAnchor.constraint(equalTo: thumbnailImageView.heightAnchor)
         ])
     }
 }
