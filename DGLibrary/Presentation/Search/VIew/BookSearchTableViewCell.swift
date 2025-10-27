@@ -12,7 +12,7 @@ final class BookSearchTableViewCell: UITableViewCell {
     
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemPink
+        imageView.backgroundColor = .secondarySystemBackground
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

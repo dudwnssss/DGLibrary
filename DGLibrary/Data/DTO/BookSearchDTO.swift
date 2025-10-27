@@ -40,11 +40,13 @@ struct BookSearchDTO: Decodable {
 
 extension BookSearchDTO {
     func toDomain() -> BookSearch {
+        let price = Double(self.price.trimmingPrefix("$")) ?? 0
+        
         return BookSearch(
             title: self.title,
             subtitle: self.subtitle,
             isbn13: self.isbn13,
-            price: 0,
+            price: price,
             imageURL: URL(string: image),
             detailURL: URL(string: url),
         )

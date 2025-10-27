@@ -31,19 +31,26 @@ struct BookDetailDTO: Decodable {
 
 extension BookDetailDTO {
     func toDomain() -> BookDetail {
+        let error = Int(self.error) ?? 0
+        let authors = self.authors.split(separator: ", ").map { String($0) }
+        let pages = Int(self.pages) ?? 0
+        let year = Int(self.year) ?? 0
+        let rating = Double(self.rating) ?? 0
+        let price = Double(self.price.trimmingPrefix("$")) ?? 0
+
         return BookDetail(
-            error: 0,
+            error: error,
             title: self.title,
             subtitle: self.subtitle,
-            authors: [],
+            authors: authors,
             publisher: self.publisher,
             isbn10: self.isbn10,
             isbn13: self.isbn13,
-            pages: 0,
-            year: 0,
-            rating: 0,
+            pages: pages,
+            year: year,
+            rating: rating,
             desc: self.desc,
-            price: 0,
+            price: price,
             imageURL: URL(string: image),
             detailURL: URL(string: url),
             pdf: pdf?.compactMap { PDFChapter(title: $0.key, url: URL(string: $0.value)) } ?? []

@@ -34,22 +34,32 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
     }
     
     private func convertToDisplayedBook(_ book: BookDetail) -> BookDetailModel.DisplayedBook {
+        let authors = book.authors.joined(separator: ", ")
+        let rating = "★ \(book.rating)"
+        let pages = "\(book.pages)page"
+        let year = "\(book.year)"
+        let price = formatPrice(book.price)
+        
         return BookDetailModel
             .DisplayedBook(
                 title: book.title,
                 subtitle: book.subtitle,
-                authors: "",
+                authors: authors,
                 publisher: book.publisher,
                 isbn10: book.isbn10,
                 isbn13: book.isbn13,
-                pages: "",
-                year: "",
-                rating: "",
+                pages: pages,
+                year: year,
+                rating: rating,
                 desc: book.desc,
-                price: "",
+                price: price,
                 imageURL: book.imageURL,
                 detailUrl: book.detailURL,
                 pdfs: book.pdf
             )
+    }
+    
+    private func formatPrice(_ price: Double) -> String {
+        return String(format: "$%.2f", price)
     }
 }

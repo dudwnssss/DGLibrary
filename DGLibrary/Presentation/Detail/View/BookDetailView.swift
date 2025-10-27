@@ -23,7 +23,7 @@ final class BookDetailView: UIView {
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemPink
+        imageView.backgroundColor = .secondarySystemBackground
         return imageView
     }()
     
@@ -74,6 +74,7 @@ final class BookDetailView: UIView {
     
     private let descLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         return label
     }()
     
@@ -132,6 +133,7 @@ final class BookDetailView: UIView {
         yearLabel.text = book.year
         ratingLabel.text = book.rating
         descLabel.text = book.desc
+        priceLabel.text = book.price
         
         if !book.pdfs.isEmpty {
             setupPDFButton()
@@ -162,7 +164,7 @@ final class BookDetailView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         
         addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false

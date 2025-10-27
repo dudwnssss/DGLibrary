@@ -31,7 +31,7 @@ final class BookSearchView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         
         addSubview(tableView)
         

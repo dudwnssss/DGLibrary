@@ -95,6 +95,7 @@ extension BookSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let request: BookSearchModel.Select.Request = .init(index: indexPath.row)
         interactor?.select(request: request)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
