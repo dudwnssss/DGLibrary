@@ -41,7 +41,8 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
                 desc: book.desc,
                 price: "",
                 imageURL: book.imageURL,
-                detailUrl: book.detailURL
+                detailUrl: book.detailURL,
+                pdfs: book.pdf
             )
     }
 }

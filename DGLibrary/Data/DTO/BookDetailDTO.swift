@@ -46,7 +46,7 @@ extension BookDetailDTO {
             price: 0,
             imageURL: URL(string: image),
             detailURL: URL(string: url),
-            pdf: []
+            pdf: pdf?.compactMap { PDFChapter(title: $0.key, url: URL(string: $0.value)) } ?? []
         )
     }
 }

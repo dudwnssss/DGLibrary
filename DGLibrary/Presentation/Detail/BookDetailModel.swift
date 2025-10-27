@@ -22,6 +22,7 @@ enum BookDetailModel {
         let price: String
         let imageURL: URL?
         let detailUrl: URL?
+        let pdfs: [PDFChapter]
     }
     
     enum Fetch {

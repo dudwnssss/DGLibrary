@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PDFKit
 
 final class BookDetailView: UIView {
     private let scrollView: UIScrollView = {
@@ -81,6 +82,15 @@ final class BookDetailView: UIView {
         return label
     }()
     
+    private lazy var pdfView: PDFView = {
+        let pdfView = PDFView()
+        pdfView.backgroundColor = .cyan
+        pdfView.autoScales = true
+        pdfView.displayMode = .singlePageContinuous
+        pdfView.displayDirection = .vertical
+        return pdfView
+    }()
+    
     private lazy var verticalStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel,
@@ -93,7 +103,8 @@ final class BookDetailView: UIView {
             yearLabel,
             ratingLabel,
             descLabel,
-            priceLabel
+            priceLabel,
+            pdfView
         ])
         stackView.axis = .vertical
         return stackView
@@ -121,6 +132,12 @@ final class BookDetailView: UIView {
         yearLabel.text = book.year
         ratingLabel.text = book.rating
         descLabel.text = book.desc
+
+        
+        if let url = URL(string: "https://archive.org/download/notes-on-randomized-algorithms-1761303796/notes-on-randomized-algorithms.pdf"),
+           let document = PDFDocument(url: url) {
+            pdfView.document = document
+        }
     }
     
     private func setupUI() {
