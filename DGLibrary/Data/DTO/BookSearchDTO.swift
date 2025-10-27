@@ -17,6 +17,16 @@ struct BookSearchListDTO: Decodable {
     let books: [BookSearchDTO]
 }
 
+extension BookSearchListDTO {
+    func toDomain() -> BookSearchList {
+        return BookSearchList(
+            total: Int(total) ?? 0,
+            page: Int(page) ?? 0,
+            books: books.map { $0.toDomain() }
+        )
+    }
+}
+
 struct BookSearchDTO: Decodable {
     ///문서에는 옵셔널에 대한 명세가 없기에 전체 속성이 옵셔널 가능성 있는 상태이나, 편의 상 구현 후 예외처리
     
@@ -26,4 +36,17 @@ struct BookSearchDTO: Decodable {
     let price: String
     let image: String
     let url: String
+}
+
+extension BookSearchDTO {
+    func toDomain() -> BookSearch {
+        return BookSearch(
+            title: self.title,
+            subtitle: self.subtitle,
+            isbn13: self.isbn13,
+            price: 0,
+            imageURL: nil,
+            detailURL: nil
+        )
+    }
 }

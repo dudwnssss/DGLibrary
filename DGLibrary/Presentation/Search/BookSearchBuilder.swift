@@ -13,7 +13,8 @@ enum BookSearchBuilder {
         let presenter = DefaultBookSearchPresenter()
         let router = DefaultBookSearchRouter()
         
-        let repository = MockBookRepository()
+        let networkService = DefaultNetworkService()
+        let repository = DefaultBookRepository(networkService: networkService)
         let interactor = DefaultBookSearchInteractor(repository: repository)
         
         viewController.interactor = interactor

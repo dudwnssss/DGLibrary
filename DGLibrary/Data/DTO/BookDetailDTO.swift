@@ -29,3 +29,24 @@ struct BookDetailDTO: Decodable {
     let pdf: [String: String]
 }
 
+extension BookDetailDTO {
+    func toDomain() -> BookDetail {
+        return BookDetail(
+            error: 0,
+            title: self.title,
+            subtitle: self.subtitle,
+            authors: [],
+            publisher: self.publisher,
+            isbn10: self.isbn10,
+            isbn13: self.isbn13,
+            pages: 0,
+            year: 0,
+            rating: 0,
+            desc: self.desc,
+            price: 0,
+            imageURL: nil,
+            detailURL: nil,
+            pdf: []
+        )
+    }
+}

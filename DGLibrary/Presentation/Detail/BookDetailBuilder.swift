@@ -12,7 +12,8 @@ enum BookDetailBuilder {
         let viewController = BookDetailViewController(isbn13: isbn13)
         let presenter = DefaultBookDetailPresenter()
         
-        let repository = MockBookRepository()
+        let networkService = DefaultNetworkService()
+        let repository = DefaultBookRepository(networkService: networkService)
         let interactor = DefaultBookDetailInteractor(repository: repository)
         
         viewController.interactor = interactor

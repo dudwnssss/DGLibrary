@@ -13,7 +13,6 @@ enum BookAPI {
 }
 
 extension BookAPI: URLRequestConvertible {
-    
     var baseURL: String {
         Secrets.apiURL
     }
