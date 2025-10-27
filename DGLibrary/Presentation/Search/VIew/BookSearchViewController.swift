@@ -90,7 +90,7 @@ extension BookSearchViewController: UITableViewDataSource {
 
 extension BookSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 120
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let request: BookSearchModel.Select.Request = .init(index: indexPath.row)
