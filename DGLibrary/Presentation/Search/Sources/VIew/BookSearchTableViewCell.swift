@@ -62,6 +62,7 @@ final class BookSearchTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        thumbnailImageView.cancelImageLoad()
         thumbnailImageView.image = nil
         titleLabel.text = nil
         subtitleLabel.text = nil
@@ -89,7 +90,7 @@ final class BookSearchTableViewCell: UITableViewCell {
             horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             horizontalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            thumbnailImageView.heightAnchor.constraint(equalToConstant: 120),
+            thumbnailImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
             thumbnailImageView.widthAnchor.constraint(equalTo: thumbnailImageView.heightAnchor)
         ])
     }

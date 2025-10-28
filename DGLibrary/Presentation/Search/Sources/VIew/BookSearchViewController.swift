@@ -110,7 +110,7 @@ extension BookSearchViewController: UISearchBarDelegate {
         
         let request: BookSearchModel.Fetch.Request = .init(query: trimmedText)
         interactor?.search(request: request)
-//        searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
 }
 

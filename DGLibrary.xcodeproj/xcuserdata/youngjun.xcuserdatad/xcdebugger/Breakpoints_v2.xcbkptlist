@@ -34,6 +34,36 @@
             endingLineNumber = "113"
             landmarkName = "searchBarSearchButtonClicked(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9C539957-F45E-4B41-B559-83A3CE53AA47 - c07f7aa58ef8635f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DGLibrary.BookSearchViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "DGLibrary.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/youngjun/Desktop/DGLibrary/DGLibrary/Presentation/Search/Sources/VIew/BookSearchViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113">
+               </Location>
+               <Location
+                  uuid = "9C539957-F45E-4B41-B559-83A3CE53AA47 - 3f7f89881828d686"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DGLibrary.BookSearchViewController.searchBarSearchButtonClicked(__C.UISearchBar) -&gt; ()"
+                  moduleName = "DGLibrary.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/youngjun/Desktop/DGLibrary/DGLibrary/Presentation/Search/Sources/VIew/BookSearchViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,6 +96,36 @@
             endingLineNumber = "45"
             landmarkName = "onLinkButtontapped()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B9D97AE5-5911-4B9B-A735-5808A82D216C - 508e6737687b9314"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DGLibrary.BookDetailViewController.displayDetailResult(viewModel: DGLibrary.BookDetailModel.Fetch.ViewModel) -&gt; ()"
+                  moduleName = "DGLibrary.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/youngjun/Desktop/DGLibrary/DGLibrary/Presentation/Detail/Sources/View/BookDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45">
+               </Location>
+               <Location
+                  uuid = "B9D97AE5-5911-4B9B-A735-5808A82D216C - 5b98108194767b1a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DGLibrary.BookDetailViewController.onLinkButtontapped() -&gt; ()"
+                  moduleName = "DGLibrary.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/youngjun/Desktop/DGLibrary/DGLibrary/Presentation/Detail/Sources/View/BookDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
