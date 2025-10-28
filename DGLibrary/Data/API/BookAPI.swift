@@ -20,7 +20,8 @@ extension BookAPI: URLRequestConvertible {
     var path: String {
         switch self {
         case .search(let query, let page):
-            return "/search/\(query)/\(page)"
+            return "/search/\(sanitizeForPath(query))/\(page)"
+            
         case .detail(let isbn13):
             return "/books/\(isbn13)"
         }
@@ -54,6 +55,16 @@ extension BookAPI: URLRequestConvertible {
         }
         
         return request
+    }
+    
+    private func sanitizeForPath(_ string: String) -> String {
+        let sanitized = string
+            .replacingOccurrences(of: " ", with: "-")
+            .replacingOccurrences(of: "/", with: "-")
+        
+        return sanitized.addingPercentEncoding(
+            withAllowedCharacters: .urlPathAllowed
+        ) ?? sanitized
     }
 }
 
