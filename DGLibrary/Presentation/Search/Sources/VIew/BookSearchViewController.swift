@@ -102,12 +102,15 @@ extension BookSearchViewController: BookSearchDisplay {
 
 extension BookSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text,
-              !query.isEmpty else { return }
+        guard let text = searchBar.text else { return }
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedText.isEmpty else { return }
         
-        let request: BookSearchModel.Fetch.Request = .init(query: query)
+        searchBar.text = trimmedText
+        
+        let request: BookSearchModel.Fetch.Request = .init(query: trimmedText)
         interactor?.search(request: request)
-        searchBar.resignFirstResponder()
+//        searchBar.resignFirstResponder()
     }
 }
 

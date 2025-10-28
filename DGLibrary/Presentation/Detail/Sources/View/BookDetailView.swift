@@ -9,6 +9,7 @@ import UIKit
 
 final class BookDetailView: UIView {
     var onMenuSelected: ((URL) -> Void)?
+    var onLinkTapped: (() -> Void)?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -87,6 +88,18 @@ final class BookDetailView: UIView {
     private let priceLabel: UILabel = {
         let label = UILabel()
         return label
+    }()
+
+    private let linkButton: UIButton = {
+        var config = UIButton.Configuration.gray()
+        config.image = UIImage(systemName: "safari")
+        config.cornerStyle = .capsule
+        config.baseBackgroundColor = .systemGray5
+        config.baseForegroundColor = .systemBlue
+        
+        let button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var pdfButton: UIButton = {
@@ -206,6 +219,15 @@ final class BookDetailView: UIView {
             thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             thumbnailImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             thumbnailImageView.heightAnchor.constraint(equalTo: thumbnailImageView.widthAnchor)
+        ])
+        
+        thumbnailImageView.addSubview(linkButton)
+        
+        NSLayoutConstraint.activate([
+            linkButton.trailingAnchor
+                .constraint(equalTo: thumbnailImageView.trailingAnchor, constant: -8),
+            linkButton.bottomAnchor
+                .constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -8)
         ])
         
         contentView.addSubview(verticalStackView)

@@ -11,9 +11,9 @@ import Foundation
 
 struct BookSearchListDTO: Decodable {
     /// 문서에는 옵셔널에 대한 명세가 없기에 전체 속성이 옵셔널 가능성 있는 상태이나, 편의 상 구현 후 예외처리
-    
+    let error: String
     let total: String
-    let page: String
+    let page: String?
     let books: [BookSearchDTO]
 }
 
@@ -21,7 +21,7 @@ extension BookSearchListDTO {
     func toDomain() -> BookSearchList {
         return BookSearchList(
             total: Int(total) ?? 0,
-            page: Int(page) ?? 0,
+            page: Int(page ?? "") ?? 0,
             books: books.map { $0.toDomain() }
         )
     }
