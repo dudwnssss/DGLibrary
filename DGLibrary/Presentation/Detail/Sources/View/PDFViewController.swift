@@ -10,15 +10,20 @@ import PDFKit
 final class PDFViewController: UIViewController {
     private let pdfURL: URL
     
-    let pdfView: PDFView = {
+    private let pdfView: PDFView = {
         let pdfView = PDFView()
-        pdfView.backgroundColor = .cyan
         pdfView.autoScales = true
-        pdfView.displayMode = .singlePage
-        pdfView.displayDirection = .horizontal
+        pdfView.displayMode = .singlePageContinuous
+        pdfView.displayDirection = .vertical
         return pdfView
     }()
-
+    
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     
     init(pdfURL: URL) {
         self.pdfURL = pdfURL
@@ -36,39 +41,69 @@ final class PDFViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         loadPDF()
     }
     
     private func loadPDF() {
+        indicator.startAnimating()
         Task.detached { [weak self] in
             guard let self else { return }
             if let document = PDFDocument(url: pdfURL) {
                 await MainActor.run { [weak self] in
                     guard let self else { return }
+                    indicator.stopAnimating()
                     pdfView.document = document
                 }
             } else {
                 await MainActor.run { [weak self] in
-                    self?.presentExternalButton()
+                    guard let self else { return }
+                    indicator.stopAnimating()
+                    presentAlert()
                 }
             }
         }
     }
     
+    private func setupUI() {
+        view.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+
     @objc private func openExternal() {
         UIApplication.shared.open(pdfURL)
     }
     
-    private func presentExternalButton() {
-        var config = UIButton.Configuration.plain()
-        config.title = "외부 브라우저에서 열기"
-        let button = UIButton(configuration: config)
-        pdfView.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        button.addTarget(self, action: #selector(openExternal), for: .touchUpInside)
+    private func presentAlert() {
+        let alert = UIAlertController(
+            title: "Unable to Preview",
+            message: "This file cannot be previewed in the app. Would you like to open it in your browser?",
+            preferredStyle: .alert
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ) { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        
+        let openAction = UIAlertAction(
+            title: "Open in Browser",
+            style: .default
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            UIApplication.shared.open(pdfURL)
+            self.dismiss(animated: true)
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(openAction)
+        
+        present(alert, animated: true)
     }
 }

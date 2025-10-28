@@ -32,6 +32,7 @@ final class BookDetailView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         return label
     }()
     
