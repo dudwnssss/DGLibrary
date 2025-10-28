@@ -61,11 +61,17 @@ extension BookSearchViewController: BookSearchDisplay {
     
     func displayLoading(viewModel: BookSearchModel.Loading.ViewModel) {
         if viewModel.isLoading {
-            mainView.indicator.startAnimating()
-            mainView.tableView.isUserInteractionEnabled = false
+            switch viewModel.type {
+            case .fullscreen:
+                mainView.fullScreenIndicator.startAnimating()
+                mainView.tableView.isUserInteractionEnabled = false
+            case .paging:
+                mainView.tableView.tableFooterView = mainView.pagingLoadingView
+            }
         } else {
-            mainView.indicator.stopAnimating()
+            mainView.fullScreenIndicator.stopAnimating()
             mainView.tableView.isUserInteractionEnabled = true
+            mainView.tableView.tableFooterView = nil
         }
     }
 }

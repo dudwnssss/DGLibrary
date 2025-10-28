@@ -38,11 +38,11 @@ final class MockBookSearchPresenter: BookSearchPresenter {
         capturedError = error
     }
     
-    func presentLoading() {
+    func presentLoading(type: BookSearchModel.Loading.LoadingType) {
         
     }
 
-    func presentHideLoading() {
+    func presentHideLoading(type: BookSearchModel.Loading.LoadingType) {
         
     }
 }

@@ -40,7 +40,7 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         currentQuery = request.query
         currentPage = 1
         
-        presenter?.presentLoading()
+        presenter?.presentLoading(type: .fullscreen)
         
         ///repository에서 검색 요청 후 상태 갱신
         Task {
@@ -60,14 +60,14 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 )
                 
                 await MainActor.run {
-                    presenter?.presentHideLoading()
+                    presenter?.presentHideLoading(type: .fullscreen)
                     presenter?.presentSearchBooks(response: response)
                 }
                 
             } catch {
                 ///검색 실패 시 예외처리
                 await MainActor.run {
-                    presenter?.presentHideLoading()
+                    presenter?.presentHideLoading(type: .fullscreen)
                     presenter?.presentError(error: error)
                 }
             }
@@ -81,6 +81,8 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         isLoadingMore = true
         let nextPage = currentPage + 1
         
+        presenter?.presentLoading(type: .paging)
+        
         ///repository에서 검색 요청 후 상태 갱신
         Task {
             do  {
@@ -91,21 +93,26 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 
                 self.allBooks.append(contentsOf: result.books)
                 self.currentPage = nextPage
-
+                
                 let response = BookSearchModel.Next.Response(books: result.books)
                 
                 await MainActor.run {
+                    presenter?.presentHideLoading(type: .paging)
                     presenter?.presentNextBooks(response: response)
                 }
                 
             } catch {
                 ///로드 실패 시 예외처리
+                await MainActor.run {
+                    presenter?.presentHideLoading(type: .paging)
+                    presenter?.presentError(error: error)
+                }
             }
             isLoadingMore = false
         }
         
     }
-
+    
     func select(request: BookSearchModel.Select.Request) {
         guard request.index >= 0,
               request.index < allBooks.count else {

@@ -21,12 +21,28 @@ final class BookSearchView: UIView {
         return tableView
     }()
     
-    private(set) var indicator: UIActivityIndicatorView = {
+    private(set) var fullScreenIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.isHidden = true
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
+    }()
+    
+    private(set) lazy var pagingLoadingView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: 60))
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        
+        footerView.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: footerView.centerYAnchor)
+        ])
+        
+        return footerView
     }()
     
     override init(frame: CGRect) {
@@ -51,11 +67,11 @@ final class BookSearchView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        tableView.addSubview(indicator)
+        tableView.addSubview(fullScreenIndicator)
                 
         NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+            fullScreenIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            fullScreenIndicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
 }

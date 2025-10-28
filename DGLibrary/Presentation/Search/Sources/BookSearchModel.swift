@@ -53,6 +53,12 @@ enum BookSearchModel {
     enum Loading {
         struct ViewModel {
             let isLoading: Bool
+            let type: LoadingType
+        }
+        
+        enum LoadingType {
+            case fullscreen
+            case paging
         }
     }
 }
