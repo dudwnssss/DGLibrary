@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol BookDetailPresenter {
-    func presentDetailBook(response: BookDetailModel.Fetch.Response)
-    func presentPDF(response: BookDetailModel.PDF.Resopnse)
-    func presentError(error: Error)
-}
-
 final class DefaultBookDetailPresenter: BookDetailPresenter {
     weak var viewController: BookDetailDisplay?
     var router: BookDetailRouter?

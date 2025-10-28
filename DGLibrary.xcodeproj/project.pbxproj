@@ -31,6 +31,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Info.plist,
+				Presentation/Detail/Tests/BookDetailInteractorTests.swift,
 				Presentation/Search/Tests/BookSearchInteractorTests.swift,
 			);
 			target = 10190D672EAB47D200B3CB6F /* DGLibrary */;
@@ -38,6 +39,7 @@
 		10B137CF2EAF9A9400D4011D /* Exceptions for "DGLibrary" folder in "DGLibraryTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Presentation/Detail/Tests/BookDetailInteractorTests.swift,
 				Presentation/Search/Tests/BookSearchInteractorTests.swift,
 			);
 			target = 10B137C42EAF9A7E00D4011D /* DGLibraryTests */;
