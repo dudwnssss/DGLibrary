@@ -265,8 +265,9 @@ func next(request: BookSearchModel.Next.Request) {
 ### Technical Improvements
 
 **1. Test Coverage Enhancement**
-- View 레이어 UI 테스트 
+- 메모리 캐시 및 디스크 캐시 테스트
 - Integration 테스트 
+- View 레이어 UI 테스트 
 - Edge case 테스트 보강
 
 **2. Network Layer Enhancement**

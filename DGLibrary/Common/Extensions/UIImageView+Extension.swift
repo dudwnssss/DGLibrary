@@ -68,7 +68,9 @@ extension UIImageView {
                     self.image = image
                 }
             } catch {
+                #if DEBUG
                 print("Image download failed: \(error)")
+                #endif
             }
         }
     }
