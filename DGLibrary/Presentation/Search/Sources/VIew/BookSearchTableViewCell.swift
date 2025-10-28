@@ -13,7 +13,7 @@ final class BookSearchTableViewCell: UITableViewCell {
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .secondarySystemBackground
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -32,15 +32,24 @@ final class BookSearchTableViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
-    
+        
     private let priceLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
+    private let urlLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+
+    
     private lazy var verticalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, isbnLabel, priceLabel])
+        let stackView = UIStackView(
+            arrangedSubviews: [titleLabel, subtitleLabel, isbnLabel, priceLabel, urlLabel]
+        )
         stackView.axis = .vertical
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
@@ -76,6 +85,7 @@ final class BookSearchTableViewCell: UITableViewCell {
         subtitleLabel.text = book.subtitle
         isbnLabel.text = book.isbn13
         priceLabel.text = book.price
+        urlLabel.text = book.detailURL?.absoluteString
     }
     
     private func setupUI () {
