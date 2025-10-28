@@ -11,6 +11,7 @@ protocol BookSearchPresenter {
     func presentSearchBooks(response: BookSearchModel.Fetch.Response)
     func presentNextBooks(response: BookSearchModel.Next.Response)
     func presentBookDetail(response: BookSearchModel.Select.Response)
+    func presentEmptyResult(response: BookSearchModel.Empty.Response)
     func presentError(error: Error)
     func presentLoading(response: BookSearchModel.Loading.Response)
     func presentHideLoading(response: BookSearchModel.Loading.Response)
@@ -38,10 +39,24 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
         router?.navigateToBookDetail(isbn13: response.isbn13)
     }
     
+    func presentEmptyResult(response: BookSearchModel.Empty.Response) {
+        let viewModel = BookSearchModel.Empty.ViewModel(query: response.query)
+        viewController?.displayEmptyAlert(viewModel: viewModel)
+    }
+    
     func presentError(error: any Error) {
         viewController?.displayError(message: error.localizedDescription)
     }
     
+    func presentLoading(response: BookSearchModel.Loading.Response) {
+        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: true, type: response.type)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
+
+    func presentHideLoading(response: BookSearchModel.Loading.Response) {
+        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: false, type: response.type)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
     
     private func convertToDisplayedBook(_ book: BookSearch) -> BookSearchModel.DisplayedBook {
         return BookSearchModel.DisplayedBook(
@@ -56,15 +71,5 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
     
     private func formatPrice(_ price: Double) -> String {
         return String(format: "$%.2f", price)
-    }
-    
-    func presentLoading(response: BookSearchModel.Loading.Response) {
-        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: true, type: response.type)
-        viewController?.displayLoading(viewModel: viewModel)
-    }
-
-    func presentHideLoading(response: BookSearchModel.Loading.Response) {
-        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: false, type: response.type)
-        viewController?.displayLoading(viewModel: viewModel)
     }
 }

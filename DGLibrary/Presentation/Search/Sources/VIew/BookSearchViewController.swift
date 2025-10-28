@@ -54,6 +54,20 @@ extension BookSearchViewController: BookSearchDisplay {
             mainView.tableView.insertRows(at: indexPaths, with: .fade)
         }
     }
+    
+    func displayEmptyAlert(viewModel: BookSearchModel.Empty.ViewModel) {
+        let alert = UIAlertController(
+            title: "No Results",
+            message: "No results found for '\(viewModel.query)'.\nPlease check your spelling.",
+            preferredStyle: .alert
+        )
+        
+        let confirmAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(confirmAction)
+        
+        present(alert, animated: true)
+    }
 
     func displayError(message: String) {
         let alert = UIAlertController(
@@ -62,7 +76,7 @@ extension BookSearchViewController: BookSearchDisplay {
             preferredStyle: .alert
         )
         
-        let confirmAction = UIAlertAction(title: "Ok", style: .default)
+        let confirmAction = UIAlertAction(title: "OK", style: .default)
         
         alert.addAction(confirmAction)
         

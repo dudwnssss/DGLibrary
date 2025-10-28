@@ -50,6 +50,15 @@ enum BookSearchModel {
         }
     }
     
+    enum Empty {
+        struct Response {
+            let query: String
+        }
+        struct ViewModel {
+            let query: String
+        }
+    }
+    
     enum Loading {
         struct Response {
             let type: LoadingType

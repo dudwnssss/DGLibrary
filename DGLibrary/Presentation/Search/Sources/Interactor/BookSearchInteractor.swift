@@ -61,9 +61,15 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 )
                 
                 await MainActor.run {
+                    if result.books.isEmpty {
+                        let response = BookSearchModel.Empty.Response(query: request.query)
+                        presenter?.presentEmptyResult(response: response)
+                    } else {
+                        presenter?.presentSearchBooks(response: fetchResponse)
+                    }
+                    
                     let loadingResponse = BookSearchModel.Loading.Response(type: .fullscreen)
                     presenter?.presentHideLoading(response: loadingResponse)
-                    presenter?.presentSearchBooks(response: fetchResponse)
                 }
                 
             } catch {

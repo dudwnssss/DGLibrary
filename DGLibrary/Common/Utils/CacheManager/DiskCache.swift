@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DiskCache: Cache {
+final class DiskCache: Cache, @unchecked Sendable {
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
     private let queue = DispatchQueue(label: "com.dglibrary.diskCache", qos: .utility)
@@ -118,7 +118,7 @@ final class DiskCache: Cache {
         
         var totalSize = 0
         
-        for case let fileURL as URL in enumerator {
+        while let fileURL = enumerator.nextObject() as? URL {
             if let size = try? fileURL.resourceValues(forKeys: [.fileSizeKey]).fileSize {
                 totalSize += size
             }

@@ -52,7 +52,7 @@ extension BookDetailViewController: BookDetailDisplay {
             preferredStyle: .alert
         )
         
-        let confirmAction = UIAlertAction(title: "Ok", style: .default)
+        let confirmAction = UIAlertAction(title: "OK", style: .default)
         
         alert.addAction(confirmAction)
         

@@ -30,4 +30,8 @@ final class MockBookSearchViewController: BookSearchDisplay {
     func displayLoading(viewModel: BookSearchModel.Loading.ViewModel) {
         
     }
+    
+    func displayEmptyAlert(viewModel: BookSearchModel.Empty.ViewModel) {
+        
+    }
 }

@@ -32,6 +32,10 @@ final class MockBookSearchPresenter: BookSearchPresenter {
         didCallPresentBookDetail = true
         capturedDetailResponse = response
     }
+    
+    func presentEmptyResult(response: BookSearchModel.Empty.Response) {
+        
+    }
 
     func presentError(error: any Error) {
         didCallPresentError = true
