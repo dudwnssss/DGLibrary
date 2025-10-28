@@ -41,7 +41,7 @@ final class ImageCache {
         diskCache.remove(for: key)
     }
     
-    func clear() {
+    func clearAll() {
         memoryCache.clearAll()
         diskCache.clearAll()
     }
