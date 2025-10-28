@@ -10,7 +10,7 @@ import UIKit
 final class BookSearchView: UIView {
     private(set) var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "검색어를 입력하세요"
+        searchController.searchBar.placeholder = "Search books"
         searchController.hidesNavigationBarDuringPresentation = false
         return searchController
     }()

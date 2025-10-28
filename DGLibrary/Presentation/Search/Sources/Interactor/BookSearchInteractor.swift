@@ -40,7 +40,8 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         currentQuery = request.query
         currentPage = 1
         
-        presenter?.presentLoading(type: .fullscreen)
+        let loadingResponse = BookSearchModel.Loading.Response(type: .fullscreen)
+        presenter?.presentLoading(response: loadingResponse)
         
         ///repository에서 검색 요청 후 상태 갱신
         Task {
@@ -53,21 +54,23 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 self.currentPage = result.page
                 self.totalCount = result.total
                 
-                let response = BookSearchModel.Fetch.Response(
+                let fetchResponse = BookSearchModel.Fetch.Response(
                     books: result.books,
                     totalCount: result.total,
                     currentPage: result.page
                 )
                 
                 await MainActor.run {
-                    presenter?.presentHideLoading(type: .fullscreen)
-                    presenter?.presentSearchBooks(response: response)
+                    let loadingResponse = BookSearchModel.Loading.Response(type: .fullscreen)
+                    presenter?.presentHideLoading(response: loadingResponse)
+                    presenter?.presentSearchBooks(response: fetchResponse)
                 }
                 
             } catch {
                 ///검색 실패 시 예외처리
                 await MainActor.run {
-                    presenter?.presentHideLoading(type: .fullscreen)
+                    let loadingResponse = BookSearchModel.Loading.Response(type: .fullscreen)
+                    presenter?.presentHideLoading(response: loadingResponse)
                     presenter?.presentError(error: error)
                 }
             }
@@ -81,8 +84,8 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         isLoadingMore = true
         let nextPage = currentPage + 1
         
-        presenter?.presentLoading(type: .paging)
-        
+        let loadingResponse = BookSearchModel.Loading.Response(type: .paging)
+        presenter?.presentLoading(response: loadingResponse)
         ///repository에서 검색 요청 후 상태 갱신
         Task {
             do  {
@@ -94,17 +97,19 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 self.allBooks.append(contentsOf: result.books)
                 self.currentPage = nextPage
                 
-                let response = BookSearchModel.Next.Response(books: result.books)
+                let nextResponse = BookSearchModel.Next.Response(books: result.books)
                 
                 await MainActor.run {
-                    presenter?.presentHideLoading(type: .paging)
-                    presenter?.presentNextBooks(response: response)
+                    let loadingResponse = BookSearchModel.Loading.Response(type: .paging)
+                    presenter?.presentHideLoading(response: loadingResponse)
+                    presenter?.presentNextBooks(response: nextResponse)
                 }
                 
             } catch {
                 ///로드 실패 시 예외처리
                 await MainActor.run {
-                    presenter?.presentHideLoading(type: .paging)
+                    let loadingResponse = BookSearchModel.Loading.Response(type: .paging)
+                    presenter?.presentHideLoading(response: loadingResponse)
                     presenter?.presentError(error: error)
                 }
             }

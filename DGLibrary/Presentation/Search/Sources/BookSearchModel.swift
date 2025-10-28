@@ -51,6 +51,10 @@ enum BookSearchModel {
     }
     
     enum Loading {
+        struct Response {
+            let type: LoadingType
+        }
+        
         struct ViewModel {
             let isLoading: Bool
             let type: LoadingType

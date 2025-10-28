@@ -12,8 +12,8 @@ protocol BookSearchPresenter {
     func presentNextBooks(response: BookSearchModel.Next.Response)
     func presentBookDetail(response: BookSearchModel.Select.Response)
     func presentError(error: Error)
-    func presentLoading(type: BookSearchModel.Loading.LoadingType)
-    func presentHideLoading(type: BookSearchModel.Loading.LoadingType)
+    func presentLoading(response: BookSearchModel.Loading.Response)
+    func presentHideLoading(response: BookSearchModel.Loading.Response)
 }
 
 final class DefaultBookSearchPresenter: BookSearchPresenter {
@@ -58,13 +58,13 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
         return String(format: "$%.2f", price)
     }
     
-    func presentLoading(type: BookSearchModel.Loading.LoadingType) {
-        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: true, type: type)
+    func presentLoading(response: BookSearchModel.Loading.Response) {
+        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: true, type: response.type)
         viewController?.displayLoading(viewModel: viewModel)
     }
 
-    func presentHideLoading(type: BookSearchModel.Loading.LoadingType) {
-        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: false, type: type)
+    func presentHideLoading(response: BookSearchModel.Loading.Response) {
+        let viewModel = BookSearchModel.Loading.ViewModel(isLoading: false, type: response.type)
         viewController?.displayLoading(viewModel: viewModel)
     }
 }

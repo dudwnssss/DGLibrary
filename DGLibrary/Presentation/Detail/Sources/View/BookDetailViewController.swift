@@ -46,7 +46,17 @@ extension BookDetailViewController: BookDetailDisplay {
     }
 
     func displayError(message: String) {
-
+        let alert = UIAlertController(
+            title: nil,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let confirmAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(confirmAction)
+        
+        present(alert, animated: true)
     }
     
     func displayLoading(viewModel: BookDetailModel.Loading.ViewModel) {
