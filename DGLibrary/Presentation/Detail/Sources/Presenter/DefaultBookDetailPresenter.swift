@@ -18,13 +18,28 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
         viewController?.displayDetailResult(viewModel: viewModel)
     }
     
-    func presentPDF(response: BookDetailModel.PDF.Resopnse) {
+    func presentPDF(response: BookDetailModel.SelectPDF.Resopnse) {
         let url = response.pdfURL
         router?.presentPDF(url: url)
     }
     
     func presentError(error: any Error) {
         viewController?.displayError(message: error.localizedDescription)
+    }
+
+    func presentLoading() {
+        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: true)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
+
+    func presentHideLoading() {
+        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: false)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
+    
+    func presentExternalURL(response: BookDetailModel.openURL.Response) {
+        let viewModel = BookDetailModel.openURL.ViewModel(url: response.url)
+        viewController?.displayExternalURL(viewModel: viewModel)
     }
     
     private func convertToDisplayedBook(_ book: BookDetail) -> BookDetailModel.DisplayedBook {
@@ -52,18 +67,8 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
                 pdfs: book.pdf
             )
     }
-    
+
     private func formatPrice(_ price: Double) -> String {
         return String(format: "$%.2f", price)
-    }
-    
-    func presentLoading() {
-        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: true)
-        viewController?.displayLoading(viewModel: viewModel)
-    }
-
-    func presentHideLoading() {
-        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: false)
-        viewController?.displayLoading(viewModel: viewModel)
     }
 }

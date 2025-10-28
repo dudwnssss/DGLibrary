@@ -10,8 +10,9 @@ import Foundation
 
 protocol BookDetailPresenter {
     func presentDetailBook(response: BookDetailModel.Fetch.Response)
-    func presentPDF(response: BookDetailModel.PDF.Resopnse)
+    func presentPDF(response: BookDetailModel.SelectPDF.Resopnse)
     func presentError(error: Error)
     func presentLoading()
     func presentHideLoading()
+    func presentExternalURL(response: BookDetailModel.openURL.Response)
 }

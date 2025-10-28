@@ -9,7 +9,8 @@ import Foundation
 
 protocol BookDetailInteractor {
     func fetch(request: BookDetailModel.Fetch.Request)
-    func selectPDF(request: BookDetailModel.PDF.Request)
+    func selectPDF(request: BookDetailModel.SelectPDF.Request)
+    func openURL()
 }
 
 

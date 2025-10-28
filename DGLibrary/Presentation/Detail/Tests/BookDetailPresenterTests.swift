@@ -69,7 +69,7 @@ final class BookDetailPresenterTests: XCTestCase {
     
     func test_pdf_이동_요청() {
         let url = URL(string: "www.naver.com")!
-        let response = BookDetailModel.PDF.Resopnse(pdfURL: url)
+        let response = BookDetailModel.SelectPDF.Resopnse(pdfURL: url)
         
         sut.presentPDF(response: response)
         

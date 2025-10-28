@@ -26,4 +26,8 @@ final class MockBookDetailViewController: BookDetailDisplay {
     func displayLoading(viewModel: BookDetailModel.Loading.ViewModel) {
         
     }
+    
+    func displayExternalURL(viewModel: BookDetailModel.openURL.ViewModel) {
+        
+    }
 }

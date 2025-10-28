@@ -13,7 +13,7 @@ final class MockBookDetailPresenter: BookDetailPresenter {
     var didCallPresentError: Bool = false
     
     var capturedFetchResponse: BookDetailModel.Fetch.Response?
-    var capturedPDFResponse: BookDetailModel.PDF.Resopnse?
+    var capturedPDFResponse: BookDetailModel.SelectPDF.Resopnse?
     var capturedError: Error?
     
     func presentDetailBook(response: BookDetailModel.Fetch.Response) {
@@ -21,7 +21,7 @@ final class MockBookDetailPresenter: BookDetailPresenter {
         capturedFetchResponse = response
     }
 
-    func presentPDF(response: BookDetailModel.PDF.Resopnse) {
+    func presentPDF(response: BookDetailModel.SelectPDF.Resopnse) {
         didCallPresentPDF = true
         capturedPDFResponse = response
     }
@@ -36,6 +36,10 @@ final class MockBookDetailPresenter: BookDetailPresenter {
     }
 
     func presentHideLoading() {
+        
+    }
+    
+    func presentExternalURL(response: BookDetailModel.openURL.Response) {
         
     }
 }

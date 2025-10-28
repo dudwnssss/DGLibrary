@@ -13,6 +13,7 @@ final class DefaultBookDetailInteractor: BookDetailInteractor {
     private let repository: BookRepository
     
     private var pdfs: [PDFChapter] = []
+    private var url: URL?
     
     init(repository: BookRepository) {
         self.repository = repository
@@ -25,6 +26,7 @@ final class DefaultBookDetailInteractor: BookDetailInteractor {
                 let result = try await repository.fetchBookDetail(isbn13: request.isbn13)
                 let response = BookDetailModel.Fetch.Response(book: result)
                 self.pdfs = response.book.pdf
+                self.url = response.book.detailURL
                 
                 await MainActor.run {
                     presenter?.presentHideLoading()
@@ -39,8 +41,15 @@ final class DefaultBookDetailInteractor: BookDetailInteractor {
         }
     }
     
-    func selectPDF(request: BookDetailModel.PDF.Request) {
-        let response = BookDetailModel.PDF.Resopnse(pdfURL: request.pdfURL)
+    func selectPDF(request: BookDetailModel.SelectPDF.Request) {
+        let response = BookDetailModel.SelectPDF.Resopnse(pdfURL: request.pdfURL)
         presenter?.presentPDF(response: response)
+    }
+    
+    func openURL() {
+        guard let url else { return }
+        let response = BookDetailModel.openURL.Response(url: url)
+        presenter?.presentExternalURL(response: response)
+        
     }
 }

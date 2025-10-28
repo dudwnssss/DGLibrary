@@ -29,6 +29,7 @@ final class BookDetailView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .secondarySystemBackground
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -90,7 +91,7 @@ final class BookDetailView: UIView {
         return label
     }()
 
-    private let linkButton: UIButton = {
+    private(set) var linkButton: UIButton = {
         var config = UIButton.Configuration.gray()
         config.image = UIImage(systemName: "safari")
         config.cornerStyle = .capsule
@@ -163,10 +164,22 @@ final class BookDetailView: UIView {
         descLabel.text = book.desc
         priceLabel.text = book.price
         
+        setupLinkButton()
         if !book.pdfs.isEmpty {
             setupPDFButton()
             configureMenu(with: book.pdfs)
         }
+    }
+    
+    func setupLinkButton() {
+        thumbnailImageView.addSubview(linkButton)
+        
+        NSLayoutConstraint.activate([
+            linkButton.trailingAnchor
+                .constraint(equalTo: thumbnailImageView.trailingAnchor, constant: -8),
+            linkButton.bottomAnchor
+                .constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -8)
+        ])
     }
 
     func setupPDFButton() {
@@ -219,15 +232,6 @@ final class BookDetailView: UIView {
             thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             thumbnailImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             thumbnailImageView.heightAnchor.constraint(equalTo: thumbnailImageView.widthAnchor)
-        ])
-        
-        thumbnailImageView.addSubview(linkButton)
-        
-        NSLayoutConstraint.activate([
-            linkButton.trailingAnchor
-                .constraint(equalTo: thumbnailImageView.trailingAnchor, constant: -8),
-            linkButton.bottomAnchor
-                .constraint(equalTo: thumbnailImageView.bottomAnchor, constant: -8)
         ])
         
         contentView.addSubview(verticalStackView)

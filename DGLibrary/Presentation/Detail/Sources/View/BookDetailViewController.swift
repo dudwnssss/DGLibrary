@@ -37,6 +37,12 @@ final class BookDetailViewController: UIViewController {
         mainView.onMenuSelected = { [weak self] url in
             self?.interactor?.selectPDF(request: .init(pdfURL: url))
         }
+        mainView.linkButton
+            .addTarget(self, action: #selector(onLinkButtontapped), for: .touchUpInside)
+    }
+    
+    @objc func onLinkButtontapped() {
+        interactor?.openURL()
     }
 }
 
@@ -65,5 +71,9 @@ extension BookDetailViewController: BookDetailDisplay {
         } else {
             mainView.indicator.stopAnimating()
         }
+    }
+    
+    func displayExternalURL(viewModel: BookDetailModel.openURL.ViewModel) {
+        UIApplication.shared.open(viewModel.url)
     }
 }

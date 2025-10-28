@@ -26,6 +26,7 @@ final class BookRepositoryTests: XCTestCase {
     
     func test_book_search_성공시_DTO_Entity_변환() async throws {
         let dto = BookSearchListDTO(
+            error: "",
             total: "100",
             page: "1",
             books: [.init(

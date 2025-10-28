@@ -37,7 +37,7 @@ enum BookDetailModel {
         }
     }
     
-    enum PDF {
+    enum SelectPDF {
         struct Request {
             let pdfURL: URL
         }
@@ -49,6 +49,15 @@ enum BookDetailModel {
     enum Loading {
         struct ViewModel {
             let isLoading: Bool
+        }
+    }
+    
+    enum openURL {
+        struct Response {
+            let url: URL
+        }
+        struct ViewModel {
+            let url: URL
         }
     }
 }
