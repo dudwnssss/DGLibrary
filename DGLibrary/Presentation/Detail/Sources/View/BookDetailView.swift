@@ -27,6 +27,7 @@ final class BookDetailView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .secondarySystemBackground
+        imageView.clipsToBounds = true
         return imageView
     }()
     

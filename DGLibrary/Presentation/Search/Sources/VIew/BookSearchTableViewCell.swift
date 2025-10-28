@@ -14,6 +14,7 @@ final class BookSearchTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .secondarySystemBackground
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
