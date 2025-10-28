@@ -24,14 +24,30 @@ final class DefaultNetworkService: NetworkService {
     }
     
     func request<T: Decodable>(_ endpoint: any URLRequestConvertible) async throws -> T {
-        let request = try endpoint.asURLRequest()
+        let request: URLRequest
+        
+        do {
+            request = try endpoint.asURLRequest()
+        } catch {
+            throw NetworkError.invalidRequest
+        }
         
         logger?.log(request: request)
         
-        let (data, response) = try await session.data(for: request)
+        
+        let data: Data
+        let response: URLResponse
+        
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch let urlError as URLError {
+            throw handleURLError(urlError)
+        } catch {
+            throw NetworkError.networkFailure
+        }
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.serverError(statusCode: 0)
+            throw NetworkError.invalidResponse
         }
         
         logger?.log(response: httpResponse, data: data)
@@ -47,6 +63,25 @@ final class DefaultNetworkService: NetworkService {
         } catch {
             logger?.log(error: error)
             throw NetworkError.decodingError
+        }
+    }
+    
+    private func handleURLError(_ error: URLError) -> NetworkError {
+        switch error.code {
+        case .notConnectedToInternet, .dataNotAllowed:
+            return .noInternetConnection
+            
+        case .timedOut:
+            return .timeout
+            
+        case .cannotFindHost, .cannotConnectToHost:
+            return .serverDown
+            
+        case .badURL:
+            return .invalidURL
+            
+        default:
+            return .networkFailure
         }
     }
 }

@@ -10,9 +10,3 @@ import Foundation
 public protocol URLRequestConvertible {
     func asURLRequest() throws -> URLRequest
 }
-
-extension URLRequestConvertible {
-    public var urlRequest: URLRequest? {
-        return try? asURLRequest()
-    }
-}
