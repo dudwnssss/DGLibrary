@@ -17,7 +17,16 @@ final class BookSearchView: UIView {
     
     private(set) var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    private(set) var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.isHidden = true
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
     }()
     
     override init(frame: CGRect) {
@@ -34,14 +43,19 @@ final class BookSearchView: UIView {
         self.backgroundColor = .systemBackground
         
         addSubview(tableView)
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+                
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        tableView.addSubview(indicator)
+                
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
 }

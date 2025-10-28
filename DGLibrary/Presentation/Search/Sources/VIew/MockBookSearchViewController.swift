@@ -26,4 +26,8 @@ final class MockBookSearchViewController: BookSearchDisplay {
         didCallDisplayError = true
         capturedMessage = message
     }
+    
+    func displayLoading(viewModel: BookSearchModel.Loading.ViewModel) {
+        
+    }
 }

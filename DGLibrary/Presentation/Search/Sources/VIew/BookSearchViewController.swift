@@ -58,6 +58,16 @@ extension BookSearchViewController: BookSearchDisplay {
     func displayError(message: String) {
         
     }
+    
+    func displayLoading(viewModel: BookSearchModel.Loading.ViewModel) {
+        if viewModel.isLoading {
+            mainView.indicator.startAnimating()
+            mainView.tableView.isUserInteractionEnabled = false
+        } else {
+            mainView.indicator.stopAnimating()
+            mainView.tableView.isUserInteractionEnabled = true
+        }
+    }
 }
 
 extension BookSearchViewController: UISearchBarDelegate {

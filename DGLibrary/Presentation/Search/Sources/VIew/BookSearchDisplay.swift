@@ -11,5 +11,5 @@ protocol BookSearchDisplay: AnyObject {
     func displaySearchResults(viewModel: BookSearchModel.Fetch.ViewModel)
     func displayMoreBooks(viewModel: BookSearchModel.Next.ViewModel)
     func displayError(message: String)
-//    func displayLoading()
+    func displayLoading(viewModel: BookSearchModel.Loading.ViewModel)
 }

@@ -40,6 +40,8 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
         currentQuery = request.query
         currentPage = 1
         
+        presenter?.presentLoading()
+        
         ///repository에서 검색 요청 후 상태 갱신
         Task {
             do {
@@ -58,12 +60,16 @@ final class DefaultBookSearchInteractor: BookSearchInteractor {
                 )
                 
                 await MainActor.run {
+                    presenter?.presentHideLoading()
                     presenter?.presentSearchBooks(response: response)
                 }
                 
             } catch {
                 ///검색 실패 시 예외처리
-                presenter?.presentError(error: error)
+                await MainActor.run {
+                    presenter?.presentHideLoading()
+                    presenter?.presentError(error: error)
+                }
             }
         }
     }

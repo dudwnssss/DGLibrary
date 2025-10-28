@@ -37,4 +37,12 @@ final class MockBookSearchPresenter: BookSearchPresenter {
         didCallPresentError = true
         capturedError = error
     }
+    
+    func presentLoading() {
+        
+    }
+
+    func presentHideLoading() {
+        
+    }
 }

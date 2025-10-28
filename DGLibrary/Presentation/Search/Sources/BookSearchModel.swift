@@ -49,4 +49,10 @@ enum BookSearchModel {
             let isbn13: String
         }
     }
+    
+    enum Loading {
+        struct ViewModel {
+            let isLoading: Bool
+        }
+    }
 }
