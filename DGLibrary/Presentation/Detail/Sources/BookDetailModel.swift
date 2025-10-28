@@ -45,4 +45,10 @@ enum BookDetailModel {
             let pdfURL: URL
         }
     }
+    
+    enum Loading {
+        struct ViewModel {
+            let isLoading: Bool
+        }
+    }
 }

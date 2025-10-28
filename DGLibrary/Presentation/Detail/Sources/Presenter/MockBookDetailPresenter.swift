@@ -30,4 +30,12 @@ final class MockBookDetailPresenter: BookDetailPresenter {
         didCallPresentError = true
         capturedError = error
     }
+    
+    func presentLoading() {
+        
+    }
+
+    func presentHideLoading() {
+        
+    }
 }

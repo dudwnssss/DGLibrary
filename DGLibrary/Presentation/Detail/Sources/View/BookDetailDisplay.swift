@@ -10,4 +10,5 @@ import Foundation
 protocol BookDetailDisplay: AnyObject {
     func displayDetailResult(viewModel: BookDetailModel.Fetch.ViewModel)
     func displayError(message: String)
+    func displayLoading(viewModel: BookDetailModel.Loading.ViewModel)
 }

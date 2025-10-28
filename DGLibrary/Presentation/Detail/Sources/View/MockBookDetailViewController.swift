@@ -22,4 +22,8 @@ final class MockBookDetailViewController: BookDetailDisplay {
         didCallDisplayError = true
         capturedMessage = message
     }
+    
+    func displayLoading(viewModel: BookDetailModel.Loading.ViewModel) {
+        
+    }
 }

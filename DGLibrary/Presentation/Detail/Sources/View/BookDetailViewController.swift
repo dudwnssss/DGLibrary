@@ -48,4 +48,12 @@ extension BookDetailViewController: BookDetailDisplay {
     func displayError(message: String) {
 
     }
+    
+    func displayLoading(viewModel: BookDetailModel.Loading.ViewModel) {
+        if viewModel.isLoading {
+            mainView.indicator.startAnimating()
+        } else {
+            mainView.indicator.stopAnimating()
+        }
+    }
 }

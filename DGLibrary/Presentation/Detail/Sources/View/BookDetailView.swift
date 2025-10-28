@@ -12,16 +12,19 @@ final class BookDetailView: UIView {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
     private let contentView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .secondarySystemBackground
         return imageView
@@ -90,6 +93,7 @@ final class BookDetailView: UIView {
         configuration.cornerStyle = .capsule
         let button = UIButton(configuration: configuration)
         button.showsMenuAsPrimaryAction = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -107,8 +111,17 @@ final class BookDetailView: UIView {
             descLabel,
             priceLabel
         ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         return stackView
+    }()
+    
+    private(set) var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.isHidden = true
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
     }()
      
     override init(frame: CGRect) {
@@ -144,7 +157,6 @@ final class BookDetailView: UIView {
     func setupPDFButton() {
         thumbnailImageView.isUserInteractionEnabled = true
         thumbnailImageView.addSubview(pdfButton)
-        pdfButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             pdfButton.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor),
@@ -167,7 +179,6 @@ final class BookDetailView: UIView {
         self.backgroundColor = .systemBackground
         
         addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -177,7 +188,6 @@ final class BookDetailView: UIView {
         ])
         
         scrollView.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -188,7 +198,6 @@ final class BookDetailView: UIView {
         ])
         
         contentView.addSubview(thumbnailImageView)
-        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             thumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -198,13 +207,19 @@ final class BookDetailView: UIView {
         ])
         
         contentView.addSubview(verticalStackView)
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor),
             verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+        
+        contentView.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
 }

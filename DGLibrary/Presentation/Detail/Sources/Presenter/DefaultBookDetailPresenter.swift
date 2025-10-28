@@ -56,4 +56,14 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
     private func formatPrice(_ price: Double) -> String {
         return String(format: "$%.2f", price)
     }
+    
+    func presentLoading() {
+        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: true)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
+
+    func presentHideLoading() {
+        let viewModel = BookDetailModel.Loading.ViewModel(isLoading: false)
+        viewController?.displayLoading(viewModel: viewModel)
+    }
 }

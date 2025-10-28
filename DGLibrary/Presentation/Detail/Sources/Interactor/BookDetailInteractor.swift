@@ -23,6 +23,7 @@ final class DefaultBookDetailInteractor: BookDetailInteractor {
     }
     
     func fetch(request: BookDetailModel.Fetch.Request) {
+        presenter?.presentLoading()
         Task {
             do {
                 let result = try await repository.fetchBookDetail(isbn13: request.isbn13)
@@ -30,10 +31,14 @@ final class DefaultBookDetailInteractor: BookDetailInteractor {
                 self.pdfs = response.book.pdf
                 
                 await MainActor.run {
+                    presenter?.presentHideLoading()
                     presenter?.presentDetailBook(response: response)
                 }
             } catch {
-                presenter?.presentError(error: error)
+                await MainActor.run {
+                    presenter?.presentHideLoading()
+                    presenter?.presentError(error: error)
+                }
             }
         }
     }
