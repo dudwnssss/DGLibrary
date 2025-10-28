@@ -24,6 +24,7 @@
 		10190D682EAB47D200B3CB6F /* DGLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10AE5A202EAB5C2000F21F1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		10B137C52EAF9A7E00D4011D /* DGLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DGLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10B1382D2EB10CAD00D4011D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -90,6 +91,7 @@
 		10190D5F2EAB47D200B3CB6F = {
 			isa = PBXGroup;
 			children = (
+				10B1382D2EB10CAD00D4011D /* README.md */,
 				10AE5A202EAB5C2000F21F1A /* .gitignore */,
 				10190D6A2EAB47D200B3CB6F /* DGLibrary */,
 				10B137C62EAF9A7E00D4011D /* DGLibraryTests */,

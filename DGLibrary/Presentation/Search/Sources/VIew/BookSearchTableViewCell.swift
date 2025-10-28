@@ -42,7 +42,6 @@ final class BookSearchTableViewCell: UITableViewCell {
         let label = UILabel()
         return label
     }()
-
     
     private lazy var verticalStackView: UIStackView = {
         let stackView = UIStackView(
