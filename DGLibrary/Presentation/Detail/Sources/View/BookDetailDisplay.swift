@@ -9,5 +9,5 @@ import Foundation
 
 protocol BookDetailDisplay: AnyObject {
     func displayDetailResult(viewModel: BookDetailModel.Fetch.ViewModel)
-    func displayError()
+    func displayError(message: String)
 }

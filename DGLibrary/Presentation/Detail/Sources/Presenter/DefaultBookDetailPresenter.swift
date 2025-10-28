@@ -24,7 +24,7 @@ final class DefaultBookDetailPresenter: BookDetailPresenter {
     }
     
     func presentError(error: any Error) {
-        viewController?.displayError()
+        viewController?.displayError(message: error.localizedDescription)
     }
     
     private func convertToDisplayedBook(_ book: BookDetail) -> BookDetailModel.DisplayedBook {

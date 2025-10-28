@@ -45,7 +45,7 @@ extension BookDetailViewController: BookDetailDisplay {
         mainView.configure(with: viewModel.book)
     }
 
-    func displayError() {
+    func displayError(message: String) {
 
     }
 }
