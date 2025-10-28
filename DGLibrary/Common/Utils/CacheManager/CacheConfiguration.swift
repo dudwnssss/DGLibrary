@@ -11,10 +11,10 @@ enum CacheConfiguration {
     /// 캐시 디렉토리 이름
     static let cacheFolderName = "DGLibraryImageCache"
     
-    /// 전체 메모리의 25% (Kingfisher 기본값)
+    /// 전체 메모리의 5%
     static var memoryCacheLimit: Int {
         let totalMemory = ProcessInfo.processInfo.physicalMemory
-        return Int(totalMemory) / 4
+        return Int(totalMemory) / 20
     }
     
     /// 디스크 캐시 최대 용량: 100MB
