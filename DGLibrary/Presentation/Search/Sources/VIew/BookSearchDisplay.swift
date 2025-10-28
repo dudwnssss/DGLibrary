@@ -10,6 +10,6 @@ import Foundation
 protocol BookSearchDisplay: AnyObject {
     func displaySearchResults(viewModel: BookSearchModel.Fetch.ViewModel)
     func displayMoreBooks(viewModel: BookSearchModel.Next.ViewModel)
-    func displayError()
+    func displayError(message: String)
 //    func displayLoading()
 }

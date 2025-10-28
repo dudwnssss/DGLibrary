@@ -55,7 +55,7 @@ extension BookSearchViewController: BookSearchDisplay {
         }
     }
 
-    func displayError() {
+    func displayError(message: String) {
         
     }
 }

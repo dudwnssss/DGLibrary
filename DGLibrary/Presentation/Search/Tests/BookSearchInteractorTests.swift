@@ -9,7 +9,7 @@ import XCTest
 @testable import DGLibrary
 
 final class BookSearchInteractorTests: XCTestCase {
-    var interactor: DefaultBookSearchInteractor!
+    var sut: DefaultBookSearchInteractor!
     var repository: MockBookRepository!
     var presenter: MockBookSearchPresenter!
     
@@ -17,12 +17,12 @@ final class BookSearchInteractorTests: XCTestCase {
         super.setUp()
         presenter = MockBookSearchPresenter()
         repository = MockBookRepository()
-        interactor = DefaultBookSearchInteractor(repository: repository)
-        interactor.presenter = presenter
+        sut = DefaultBookSearchInteractor(repository: repository)
+        sut.presenter = presenter
     }
     
     override func tearDown() {
-        interactor = nil
+        sut = nil
         repository = nil
         presenter = nil
         super.tearDown()
@@ -46,7 +46,7 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 100, page: 1, books: expectedBooks)
         )
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
 
         XCTAssertEqual(repository.fetchCallCount, 1)
@@ -60,7 +60,7 @@ final class BookSearchInteractorTests: XCTestCase {
     func test_search_실패시_에러_처리() async {
         repository.mockSearchResult = .failure(NetworkError.serverError(statusCode: 500))
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
 
         XCTAssertTrue(presenter.didCallPresentError)
@@ -84,7 +84,7 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 200, page: 1, books: firstPageBooks)
         )
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // When: 다음 페이지 요청
@@ -102,7 +102,7 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 200, page: 2, books: secondPageBooks)
         )
         
-        interactor.next(request: .init())
+        sut.next(request: .init())
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // Then
@@ -127,13 +127,13 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 1, page: 1, books: books)
         )
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         let callCountBefore = repository.fetchCallCount
         
         // When
-        interactor.next(request: .init())
+        sut.next(request: .init())
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // Then
@@ -166,11 +166,11 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 2, page: 1, books: books)
         )
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // When
-        interactor.select(request: .init(index: 0))
+        sut.select(request: .init(index: 0))
         
         // Then
         XCTAssertTrue(presenter.didCallPresentBookDetail)
@@ -193,11 +193,11 @@ final class BookSearchInteractorTests: XCTestCase {
             BookSearchList(total: 1, page: 1, books: books)
         )
         
-        interactor.search(request: .init(query: "swift"))
+        sut.search(request: .init(query: "swift"))
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // When
-        interactor.select(request: .init(index: 10))
+        sut.select(request: .init(index: 10))
         
         // Then
         XCTAssertFalse(presenter.didCallPresentBookDetail)

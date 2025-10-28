@@ -37,7 +37,7 @@ final class DefaultBookSearchPresenter: BookSearchPresenter {
     }
     
     func presentError(error: any Error) {
-        viewController?.displayError()
+        viewController?.displayError(message: error.localizedDescription)
     }
     
     

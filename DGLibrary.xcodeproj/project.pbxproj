@@ -33,6 +33,7 @@
 				App/Info.plist,
 				Presentation/Detail/Tests/BookDetailInteractorTests.swift,
 				Presentation/Search/Tests/BookSearchInteractorTests.swift,
+				Presentation/Search/Tests/BookSearchPresenterTests.swift,
 			);
 			target = 10190D672EAB47D200B3CB6F /* DGLibrary */;
 		};
@@ -41,6 +42,7 @@
 			membershipExceptions = (
 				Presentation/Detail/Tests/BookDetailInteractorTests.swift,
 				Presentation/Search/Tests/BookSearchInteractorTests.swift,
+				Presentation/Search/Tests/BookSearchPresenterTests.swift,
 			);
 			target = 10B137C42EAF9A7E00D4011D /* DGLibraryTests */;
 		};
